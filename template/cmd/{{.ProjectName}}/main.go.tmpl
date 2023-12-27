@@ -1,0 +1,30 @@
+package main
+
+import (
+    "context"
+    "os/signal"
+	"syscall"
+
+    "{{.Vars.ProjectName}}/internal/app"
+
+    {{.Modules.logger.Import}}
+    {{.Modules.logger.ImportCore}}
+
+    {{.Modules.env.Import}}
+)
+
+func main() {
+    {{.Modules.logger.Init}}
+
+    ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
+    defer cancel()
+
+    var config app.Config
+    
+    {{.Modules.env.Declaration "config"}}
+
+    if err := app.Run(ctx, config, logger); err != nil {
+        {{.Modules.logger.Message "Fatal" "Failed to run app" "Error" "err"}}
+    }
+}
+

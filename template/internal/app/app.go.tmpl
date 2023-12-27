@@ -1,0 +1,19 @@
+package app
+
+import (
+	"context"
+
+	{{.Modules.logger.Import}}
+)
+
+{{.Modules.env.Struct}}
+
+func Run(ctx context.Context, config Config, logger {{.Modules.logger.Type}}) error {
+	{{.Modules.logger.Message "info" "App started" "config" "config"}}
+	
+	<-ctx.Done()
+
+	logger.Info("App shutting down gracefully")
+
+	return nil
+}

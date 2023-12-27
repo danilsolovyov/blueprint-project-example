@@ -1,0 +1,14 @@
+ProjectName: blueprint-project-example
+Description: Some descr
+
+Template:
+  path: "./"
+
+Modules:
+  logger:
+    name: zap
+  env:
+    vars:
+      - name: APP_NAME
+        type: string
+        default: "#"
