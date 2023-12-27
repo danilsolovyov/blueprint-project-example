@@ -2,7 +2,7 @@ ProjectName: blueprint-project-example
 Description: Some descr
 
 Template:
-  path: "./"
+  path: "./template"
 
 Modules:
   logger:
